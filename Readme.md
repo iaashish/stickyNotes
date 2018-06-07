@@ -7,7 +7,9 @@ styles are in place. The application is not complete. Your job is to complete
 the application with following goals in mind.
 
 ##### Goals
-* Complete the application. A user should be to able create/update/delete the note created. For delete try to popup a context menu with delete option on right click. 
+* Complete the application. A user should be to able create/update/delete the note created. For delete try to popup a context menu with delete option on right click.
+
+* Create a simple authentication module/system where a user can set username/password to protect the application. Create and integrate UI for login-system yourself. 
 
 * Application should be programmed completely using OOP approach. Example. A note is an object so it demands its own class. Please keep the SOLID principle in mind. 
 
@@ -29,6 +31,6 @@ the application with following goals in mind.
 
 * The codes you complete should be shared via github (or any similar version or source code management portal).
 
-* Please share working application in a hosted environment. Google / Azure etc. have free tiers to support limited project hosting. 
+* Please share working application and username/password in a hosted environment. Google / Azure etc. have free tiers to support limited project hosting. 
 
 ###### Thank you for taking your precious time out and completing this test. You are one step closer to joining our team. HAPPY CODING
