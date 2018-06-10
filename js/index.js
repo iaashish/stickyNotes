@@ -1,4 +1,5 @@
 (function() {
+    var loggedInUser = sessionStorage.getItem('login');
     //Note Object
     function Note(title, content) {
         this.title = title;
@@ -33,14 +34,15 @@
             var content = document.getElementById('content').value;
             var note = new Note(text, content);
             var time = new Date().getTime();
-            if (localStorage.getItem('sticky') !== null) {
-                var map = new Map(JSON.parse(localStorage.getItem('sticky')));
+            if (localStorage.getItem(loggedInUser) !== null) {
+                var map = new Map(JSON.parse(localStorage.getItem(loggedInUser)));
                 map.set(time, note);
             } else {
                 var map = new Map();
                 map.set(time, note)
             }
-            localStorage.setItem("sticky", JSON.stringify(Array.from(map.entries())));
+
+            localStorage.setItem(loggedInUser, JSON.stringify(Array.from(map.entries())));
             document.getElementById('modal-container').innerHTML = "";
             var deletedata = document.getElementById('list');
             while (deletedata.firstElementChild) {
@@ -52,7 +54,7 @@
 
     function updateNote(data) {
         var key = parseInt(data.evt.currentTarget.parentElement.getAttribute("id"))
-        var map = new Map(JSON.parse(localStorage.getItem('sticky')));
+        var map = new Map(JSON.parse(localStorage.getItem(loggedInUser)));
 
         var data = map.get(key)
         var html = "<div class=\"modal-container\">\n" +
@@ -81,9 +83,9 @@
             var text = document.getElementById('title1').value;
             var content = document.getElementById('content').value;
             var note = new Note(text, content);
-            var map = new Map(JSON.parse(localStorage.getItem('sticky')));
+            var map = new Map(JSON.parse(localStorage.getItem(loggedInUser)));
             map.set(key, note);
-            localStorage.setItem("sticky", JSON.stringify(Array.from(map.entries())));
+            localStorage.setItem(loggedInUser, JSON.stringify(Array.from(map.entries())));
             document.getElementById('modal-container').innerHTML = "";
             var id = document.getElementById(key.toString()).children;
             id[0].textContent = text;
@@ -93,9 +95,9 @@
 
     function deleteNote(data) {
         var key = parseInt(data.evt.currentTarget.parentElement.getAttribute("id"))
-        var map = new Map(JSON.parse(localStorage.getItem('sticky')));
+        var map = new Map(JSON.parse(localStorage.getItem(loggedInUser)));
         map.delete(key);
-        localStorage.setItem("sticky", JSON.stringify(Array.from(map.entries())));
+        localStorage.setItem(loggedInUser, JSON.stringify(Array.from(map.entries())));
         var elem = document.getElementById(key.toString());
         elem.parentNode.removeChild(elem);
     }
@@ -126,7 +128,7 @@
 
     function displayNotes() {
         //get the map from localstorage
-        var map = new Map(JSON.parse(localStorage.getItem('sticky')));
+        var map = new Map(JSON.parse(localStorage.getItem(loggedInUser)));
         for (var entry of map.entries()) {
             //create li, h2 and p nodes
             var node = document.createElement("LI");
@@ -157,8 +159,8 @@
             var id = parseInt(li.id);
             map.set(id, note);
         }
-        localStorage.removeItem("sticky");
-        localStorage.setItem("sticky", JSON.stringify(Array.from(map.entries())));
+        localStorage.removeItem(loggedInUser);
+        localStorage.setItem(loggedInUser, JSON.stringify(Array.from(map.entries())));
     }
 
     //this is context menu on right click we can see update and delete options
@@ -244,7 +246,7 @@
             rootEl.removeEventListener('dragend', _onDragEnd, false);
 
             if (nextEl !== dragEl.nextSibling) {
-                a.updateOrder();
+                updateOrder();
                 onUpdate(dragEl);
             }
         }
@@ -269,3 +271,8 @@
         console.log(item);
     });
 })();
+window.onload = function() {
+  if(sessionStorage.getItem('login') == null){
+    window.location = "login.html";
+  }
+};
