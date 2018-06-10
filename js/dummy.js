@@ -4,6 +4,34 @@
         this.title = title;
         this.content = content;
     }
+
+    //Note class and all the operations create/update/delete
+    // class Note{
+    //     constructor(title, content){
+    //         this.title = title;
+    //         this.content = content;
+    //     }
+    //     create(obj){
+    //         var key = new Date().getTime();
+    //         var map = new Map();
+    //         map.set(key, obj);
+    //         if(data.state){
+    //             var map = new Map(JSON.parse(localStorage.getItem('note')));
+    //             localStorage.setItem("note", JSON.stringify(Array.from(map.entries())));
+    //         }
+    //     }
+    //     update(obj){
+    //         var map = new Map(JSON.parse(localStorage.getItem('note')));
+    //         map.set(obj.key, obj.data);
+    //         localStorage.setItem("note", JSON.stringify(Array.from(map.entries())));
+    //     }
+    //     delete(obj){
+    //         var map = new Map(JSON.parse(localStorage.getItem('note')));
+    //         map.delete(obj.key);
+    //         localStorage.setItem("note", JSON.stringify(Array.from(map.entries())));
+    //     }
+    // }
+
     //factory pattern
     function createNote() {
         var html = "<div class=\"modal-container\">\n" +
@@ -92,7 +120,7 @@
     }
 
     function deleteNote(data) {
-        var key = parseInt(data.evt.currentTarget.parentElement.getAttribute("id"))
+        var key = parseInt(map.currentTarget.parentElement.getAttribute("id"))
         var map = new Map(JSON.parse(localStorage.getItem('sticky')));
         map.delete(key);
         localStorage.setItem("sticky", JSON.stringify(Array.from(map.entries())));
@@ -104,9 +132,9 @@
 
     NoteFactory.prototype.operation = function(data) {
         var noteClass = null;
-        if (data.type == "create") {
+        if (data.type = "create") {
             noteClass = createNote;
-        } else if (data.type == "update") {
+        } else if (data.type = "update") {
             noteClass = updateNote;
         } else {
             noteClass = deleteNote;
@@ -146,6 +174,18 @@
         }
         contextMenu();
 
+    }
+
+    function updateOrder() {
+        var ul = document.getElementById("list").children;
+        var map = new Map();
+        for (var li of ul) {
+            var note = new Note(li.children[0].innerText, li.children[1].innerText);
+            var id = parseInt(li.id);
+            map.set(id, note);
+        }
+        localStorage.removeItem("sticky");
+        localStorage.setItem("sticky", JSON.stringify(Array.from(map.entries())));
     }
 
     //This will update the order of list when we re-order using drag and drop api
@@ -244,6 +284,9 @@
             rootEl.removeEventListener('dragend', _onDragEnd, false);
 
             if (nextEl !== dragEl.nextSibling) {
+                // targetKey = parseInt(dragEl.nextSibling.getAttribute("id"));
+                // actualKey = parseInt(dragEl.getAttribute("id"));
+                // a.swapdata(actualKey, targetKey);
                 a.updateOrder();
                 onUpdate(dragEl);
             }
@@ -264,8 +307,9 @@
             }, 0)
         }, false);
     }
-    displayNotes();
+
     sortable(document.getElementById('list'), function(item) {
         console.log(item);
+
     });
 })();

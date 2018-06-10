@@ -1,26 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>Sticky notes</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/modal.css">
-</head>
-<body>
-<ul>
-    <li class="create-note">
-        <a href="#" id="add-note">
+   <head>
+      <meta charset="UTF-8">
+      <title>Sticky notes</title>
+      <link rel="stylesheet" href="css/main.css">
+      <link rel="stylesheet" href="css/modal.css">
+      <style>
+
+        .menu{
+            width: 12rem;
+            height: 4.5rem;
+            background-color: #f4f4f4;
+            color: #333;
+            border: 1px solid #aaa;
+            box-shadow: 2px 2px 2px #999;
+            border-radius: 0.2rem;
+            list-style: none;
+            position: fixed;
+            z-index: 10;
+        }
+        .menu.off{
+            top: -200%;
+            left: -200%;
+        }
+        .menu-item{
+            height: 1.5rem;
+            line-height: 1.5rem;
+            font-size: 1rem;
+            font-weight: 100;
+            padding: 0 1rem;
+            cursor: pointer;
+        }
+        .menu-item:hover,
+        .menu-item:active{
+            color: #000;
+            font-weight: 500;
+        }
+    </style>
+   </head>
+   <body>
+      <ul>
+         <li class="create-note"  id="box">
+            <a href="#" id="add-note">
             + Create a note
-        </a>
-    </li>
-    <!--<li>
-        <a href="#">
-            <h2>Title #1</h2>
-            <p>Text Content #1</p>
-        </a>
-    </li>-->
-</ul>
-<div id="modal-container"></div>
-</body>
-<script src="js/index.js"></script>
+            </a>
+         </li>
+         <!--<li>
+            <a href="#">
+                <h2>Title #1</h2>
+                <p>Text Content #1</p>
+            </a>
+            </li>-->
+      </ul>
+      <ul id="list">
+      </ul>
+      
+    <div class="menu">
+        <a class="menu-item" id="Edit">Update</a>
+        <a class="menu-item" id="Delete">Delete</a>
+    </div>
+      <div id="modal-container"></div>
+   </body>
+   <script src="js/index.js"></script>
+   <script>
+
+   </script>
 </html>

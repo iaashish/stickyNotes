@@ -33,4 +33,4 @@ the application with following goals in mind.
 
 * Please share working application and username/password in a hosted environment. Google / Azure etc. have free tiers to support limited project hosting. 
 
-###### Thank you for taking your precious time out and completing this test. You are one step closer to joining our team. HAPPY CODING
+###### Thank you for taking your precious time out and completing this test. You are one step closer to joining our team. HAPPY CODING# stickyNotes
