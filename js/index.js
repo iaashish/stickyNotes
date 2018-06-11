@@ -1,3 +1,10 @@
+/*
+This code is used for actual note creation
+I used used factory pattern to design this
+Initially a check will be performed whether a user is logged in or not
+then only it will navigated to sticky note application.
+If the user logs out the application will be navigated to login page
+*/
 window.onload = function() {
     if (sessionStorage.getItem('login') == null) {
         window.location = "login.html";
@@ -16,7 +23,8 @@ window.onload = function() {
                 this.content = content;
             }
             //factory pattern
-            //This function will create a note
+            //This function will create a note. 
+            //Note will be stored in localstorage
             function createNote() {
                 var html = "<div class=\"modal-container\">\n" +
                     "    <section class=\"create-modal\">\n" +
@@ -105,7 +113,7 @@ window.onload = function() {
                     id[1].textContent = content;
                 });
             }
-
+            //This function will delete the note upon pressing delete button
             function deleteNote(data) {
                 var key = parseInt(data.evt.currentTarget.parentElement.getAttribute("id"))
                 var map = new Map(JSON.parse(localStorage.getItem(loggedInUser)));
@@ -144,7 +152,9 @@ window.onload = function() {
                 window.location = "login.html";
             })
 
-
+            //This function is used to display notes
+            //Once user logs in this function will be called
+            //and it appends note to the Ul tag
             function displayNotes() {
                 //get the map from localstorage
                 var map = new Map(JSON.parse(localStorage.getItem(loggedInUser)));
@@ -289,6 +299,7 @@ window.onload = function() {
                     }, 0)
                 }, false);
             }
+            //This function will be called when a user logs in
             displayNotes();
             sortable(document.getElementById('list'), function(item) {
                 console.log(item);

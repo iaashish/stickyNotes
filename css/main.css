@@ -110,10 +110,10 @@
      opacity: .4;
 }
  .menu{
-     width: 12rem;
-     height: 4.5rem;
-     background-color: #f4f4f4;
-     color: #333;
+     width: 6rem;
+     height: 3rem;
+     background-color: #4CAF50;
+     color: #000;
      border: 1px solid #aaa;
      box-shadow: 2px 2px 2px #999;
      border-radius: 0.2rem;
@@ -149,4 +149,3 @@
      margin: 4px 2px;
      cursor: pointer;
 }
- 

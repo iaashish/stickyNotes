@@ -1,3 +1,9 @@
+/*
+Initially user login will be stored in sessionstorage 
+which means if the browser is closed logins will be deleted permanently
+Once the user signout he will be navigated back to login page
+login functionality is implemented using singleton pattern.
+*/
 window.onload = function() {
     if (sessionStorage.getItem('login') != null) {
         window.location = "index.html";
@@ -16,16 +22,23 @@ window.onload = function() {
                         this.email = email;
                         this.password = password;
                     }
+                    //Login function will check if a user exists or not if
+                    //user doesn't exists it will display error stating user doesn't exists
+                    //if password is wrong it will show invalid credentials error.
                     login() {
                         var map = new Map(JSON.parse(localStorage.getItem('userstorage')));
                         var user = map.get(this.email);
-                        if (user.password == this.password) {
+                        if (user == undefined) {
+                            return "Invalid";
+                        } else if (user.password == this.password) {
                             sessionStorage.setItem('login', this.email);
                             return true;
                         }
 
                         return false;
                     }
+                    //createuser function will create the user if user already exists, user will
+                    //not be created.
                     createUser(username) {
                         var createUser = {
                             'username': username,
@@ -41,20 +54,23 @@ window.onload = function() {
                         }
                         return false;
                     }
-
                 }
-
                 return {
-                    // Public methods and variables
+                    //This function is used for login purpose
+                    //Original operaions is performed in user object.
                     login: function(credentials) {
                         var user = new User(credentials.email.value, credentials.password.value);
-                        if (user.login()) {
+                        var login = user.login();
+                        if (login == true) {
                             window.location = "index.html";
+                        } else if (login == "Invalid") {
+                            document.getElementById("login-error").innerHTML = "User doesn't exists";
                         } else {
                             document.getElementById("login-error").innerHTML = "!! Invalid credentials";
                         }
                     },
-
+                    //This function is used to create the user.
+                    //Data is passed to user object where operations are performed
                     createUser: function(credentials) {
                         var user = new User(credentials.email.value, credentials.password.value);
                         if (user.createUser(credentials.username.value)) {
@@ -78,20 +94,20 @@ window.onload = function() {
             };
         })();
 
-        var singleA = mySingleton.getInstance();
+        var singleton = mySingleton.getInstance();
 
         var form = document.getElementById('login-form');
         form.onsubmit = function(e) {
             e.preventDefault();
-            singleA.login(form)
+            singleton.login(form)
         }
 
         var rForm = document.getElementById('register-form');
         rForm.onsubmit = function(e) {
             e.preventDefault();
-            singleA.createUser(rForm);
+            singleton.createUser(rForm);
         }
-
+        //The codes below is used to diplay create panel and login panel
         document.getElementById("create").addEventListener("click", function() {
             document.getElementById("login-form").style.display = "none";
             document.getElementById("register-form").removeAttribute("style");
