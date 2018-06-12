@@ -10,10 +10,10 @@ As said in the description i used local storage to store the data. And sessionst
 IE has [Issue] with localstorage so this application will not work with IE as well as edge.<br />
 Firefox has some issue with addEventListener i tried my best to resolve it. Drag and drop wont work in firefox.<br />
 
-I have provided all the comments in the code.
+I have provided all the comments in the code.<br />
 
-For the login functioanlity i have used single ton pattern
-For actual application functionality i used factory pattern
+For the login functioanlity i have used single ton pattern.<br />
+For actual application functionality i used factory pattern.<br />
 
 
 [Sticky Notes]: <http://ec2-18-216-178-101.us-east-2.compute.amazonaws.com:8080/ensue/login.html>
